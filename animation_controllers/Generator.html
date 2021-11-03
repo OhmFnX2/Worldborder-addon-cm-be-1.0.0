@@ -1,0 +1,143 @@
+<head>
+    <title>Worldborder Addon Generator</title>
+    <style>
+        body {
+            background: #4dafff;
+            text-align: center;
+            justify-content: center;
+
+        }
+        h1, h2 {
+            color: rgb(255, 255, 255);
+            text-shadow: 1px 1px black;
+            text-shadow: 3px 3px 5px black;
+        }
+        label {
+            color: rgb(255, 255, 255);
+            text-shadow: 1px 1px black;
+            text-shadow: 3px 3px 5px black;
+        }
+
+        .titletext {
+            font-size: 1.5cm;
+        }
+        .conten, label {
+            display: flexbox;
+            justify-content: center;
+            text-align: center;
+            margin: 35px;
+        }
+        .contenl, input  {
+            width: 3.3rem;
+            height: 1.3rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 20px;
+        }
+        #Width {
+            width: 4.5rem;
+            height: 1.3 rem;
+        }
+        #wsound, #effect, #effectlevel, #particle {
+            width: 10rem;
+        }
+        .wss {
+            margin: 43px;
+        }
+        button {
+            width: 5rem;
+            height: 2rem;
+        }
+        #answer {
+            text-align: left;
+            color: white;
+            margin-left: 15px;
+        }
+
+    </style>
+    <script>
+        function myFunction() {
+            let x = parseInt(document.getElementById("x").value)
+            let z = parseInt(document.getElementById("z").value)
+            let Width = parseInt(document.getElementById("Width").value)
+            let wsound = document.getElementById("wsound").value
+            let particle = document.getElementById("particle").value
+            let effect = document.getElementById("effect").value
+            let effectlevel = parseInt(document.getElementById("effectlevel").value)
+            let answer = ""
+            let i = 0
+            answer += `\"/scoreboard players add @a[tag=owner] loop500ms 1\",` + "<br>"
+            answer += `\"/execute @a[tag=owner,scores={loop500ms=11}] ~ ~ ~ scoreboard players set @s loop500ms 0\",` + "<br>"
+            for (i = 1; i <= Width; i++) {
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ effect @a[x=-${i + x},y=0,z=-${i + z},dx=9999999,dy=999,dz=-9999999,tag=worldborder] ${effect} 1 ${effectlevel}\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ effect @a[x=${i + x},y=0,z=${i + z},dx=-9999999,dy=999,dz=9999999,tag=worldborder] ${effect} 1 ${effectlevel}\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ effect @a[x=${i + x},y=0,z=-${i + z},dx=9999999,dy=999,dz=9999999,tag=worldborder] ${effect} 1 ${effectlevel}\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ effect @a[x=-${i + x},y=0,z=${i + z},dx=-9999999,dy=999,dz=-9999999,tag=worldborder] ${effect} 1 ${effectlevel}\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ title @a actionbar §l§bWorldborder = §a${i}\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ execute @a[r=50,tag=worldborder] ~ ~ ~ particle ${particle} ${i + x} ~ ~\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ execute @a[r=50,tag=worldborder] ~ ~ ~ particle ${particle} -${i + x} ~ ~\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ execute @a[r=50,tag=worldborder] ~ ~ ~ particle ${particle} ~ ~ ${i + z}\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ execute @a[r=50,tag=worldborder] ~ ~ ~ particle ${particle} ~ ~ -${i + z}\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ execute @a[tag=owner,scores={loop500ms=10}] ~ ~ ~ playsound ${wsound} @s ${i + x} ~ ~ 1 1\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ execute @a[tag=owner,scores={loop500ms=10}] ~ ~ ~ playsound ${wsound} @s -${i + x} ~ ~ 1 1\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ execute @a[tag=owner,scores={loop500ms=10}] ~ ~ ~ playsound ${wsound} @s ~ ~ ${i + z} 1 1\",` + "<br>"
+                answer += `\"/execute @a[tag=owner,scores={worldborder=${i}}] ~ ~ ~ execute @a[tag=owner,scores={loop500ms=10}] ~ ~ ~ playsound ${wsound} @s ~ ~ -${i + z} 1 1\",` + "<br>"
+            }
+            document.getElementById("answer").innerHTML = answer
+        }
+
+    </script>
+</head>
+<body>
+    <h1 class="titletext">Worldborder Addon Generator</h1>
+    <h2>|--------------------------------------------------------------------------------------------------|</h2>
+    <div class="conten">
+        <center>
+            <h1>Midpoint</h1>
+            <label for="X">X :</label>
+            <label for="Z">Z :</label>
+            <div class="contenl">
+                    <input type="number" id="x" value="0">
+                    <input type="number" id="z" value="0">
+            </div>
+        </center>
+    </div>
+    <h2>----------------------------------------------------------------------------------------</h2>
+    <div class="conten">
+        <center>
+            <h1>Width Max Size</h1>
+            <div class="contenl">
+                <input type="number" id="Width">
+            </div>
+        </center>
+    </div>
+    <h2>----------------------------------------------------------------------------------------</h2>
+    <div class="conten">
+        <center>
+            <h1>Detal</h1>
+            <label for="warningsound">Warning sound <a href="https://www.digminecraft.com/lists/sound_list_win10.php">Here</a></label>
+            <label for="particle">Particle <a href="https://minecraft.gamepedia.com/Particles">Here</a></label>
+            <div class="contenl">
+                <input type="text" id="wsound" value="note.bass">
+                <input type="text" id="particle" value="minecraft:lava_particle">
+            </div>
+            <label for="effect">Effect <a href="https://minecraft.gamepedia.com/Effect">Here</a></label>
+            <label for="particle" class="wsss">Effect Level [0 - 255]</label>
+            <div class="contenl">
+                <input type="text" id="effect" value="wither">
+                <input type="number" id="effectlevel" value="1">
+            </div>
+        </center>
+    </div>
+    <h2>----------------------------------------------------------------------------------------</h2>
+    <center>
+    <button type="button" onclick="myFunction()">Create</button>
+    </center>
+    <h2>----------------------------------------------------------------------------------------</h2>
+    <div id="answer">
+
+    </div>
+</body>

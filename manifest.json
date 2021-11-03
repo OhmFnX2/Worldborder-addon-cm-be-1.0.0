@@ -1,0 +1,18 @@
+{
+    "format_version": 2,
+    "header": {
+        "description": "Create by OhmFn X2 ",
+        "name": "Worldborder gen 1.0v",
+        "uuid": "fc6ca035-6b15-4e29-81d1-7cac27e5c62c",
+        "version": [1, 1, 0],
+        "min_engine_version": [1, 14, 0]
+    },
+    "modules": [
+        {
+            "description": "Worldborder gen 1.0v",
+            "type": "data",
+            "uuid": "c37414ed-61a9-4a7c-a892-a7edb3350ceb",
+            "version": [1, 1, 0]
+        }
+    ]
+}
